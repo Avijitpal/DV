@@ -9,14 +9,11 @@ import {BrowserRouter,Route} from 'react-router-dom';
 function App() {
   return (
      <BrowserRouter> 
-       <div>
-         
+        <div>
            <Input/>
            <Route path="/view" exact component ={View}/>
-       </div>
+        </div>
        </BrowserRouter>
-
- 
   )
 }
 
