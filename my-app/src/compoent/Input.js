@@ -4,43 +4,64 @@ import View from './View'
 import CSVReader from 'react-csv-reader'
 import {Link} from 'react-router-dom';
 import react from 'react';
+import axios from 'axios';
 // heree  we  are importing the ReactFileReader to use it
 import ReactFileReader from 'react-file-reader';
 
-import {Bar} from 'react-chartjs-2';
-const state = {
-  labels: ['January', 'February', 'March',
-           'April', 'May'],
-  datasets: [
-    {
-      label: 'Rainfall',
-      backgroundColor: 'rgba(75,192,192,1)',
-      borderColor: 'rgba(0,0,0,1)',
-      borderWidth: 2,
-      data: [65, 59, 80, 81, 56]
-    }
-  ]
-}
+class Input extends Component {
+  constructor(props) {
+    super(props);
 
-export default class Input extends React.Component {
+    this.state = {
+      bookID: '',
+      bookTitle: '',
+      bookAuthor: '',
+    };
+  }
+
+  handleInputChange = e => {
+    console.log("got the file")
+   // this.setState({
+   //   [e.target.name]: e.target.value,
+   // });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { bookID, bookTitle, bookAuthor } = this.state;
+
+    const book = {
+      bookID,
+      bookTitle,
+      bookAuthor,
+    };
+
+    axios
+      .post('http://localhost:3001/create', book)
+      .then(() => console.log('Book Created'))
+      .catch(err => {
+        console.error(err);
+      });
+  };
+ // <input
+ // type="text"
+ // className="form-control"
+ // name="bookID"
+//  placeholder="Book ID"
+ // onChange={this.handleInputChange}
+///>
+
   render() {
     return (
       <div>
-        <Bar
-          data={state}
-          options={{
-            title:{
-              display:true,
-              text:'Average Rainfall per month',
-              fontSize:20
-            },
-            legend:{
-              display:true,
-              position:'right'
-            }
-          }}
-        />
-      </div>
+          <form onSubmit={this.handleSubmit}/>
+            <input type="file" ID="fileSelect" accept=".xlsx, .xls, .csv" onChange={this.handleInputChange}/>
+            </div>
+           
     );
   }
 }
+export default Input
+
+
