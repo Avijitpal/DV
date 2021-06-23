@@ -1,12 +1,12 @@
 //import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import View from './View'
-import CSVReader from 'react-csv-reader'
-import {Link} from 'react-router-dom';
-import react from 'react';
+//import ReactDOM from 'react-dom'
+//import View from './View'
+//import CSVReader from 'react-csv-reader'
+//import {Link} from 'react-router-dom';
+//import react from 'react';
 import axios from 'axios';
 // heree  we  are importing the ReactFileReader to use it
-import ReactFileReader from 'react-file-reader';
+//import ReactFileReader from 'react-file-reader';
 
 
 import React, { useState } from 'react';
@@ -75,7 +75,7 @@ function Input() {
       //console.log(data);
       axios
       .post('http://localhost:8000/print',data)
-      .then(()=>console.log('data is sent'))
+      .then(()=>console.log(data))
       .catch(err=>{
         console.error(err);
       })
@@ -88,7 +88,7 @@ function Input() {
     <div>
       <input
         type="file"
-        accept=".csv,.xlsx,.xls"
+        accept=".csv,.xlsx,.xls,.xlw"
         onChange={handleFileUpload}
       />,
       <DataTable
@@ -103,3 +103,5 @@ function Input() {
 export default Input;
 
 
+///read this one is for the data sending features
+//https://stackoverflow.com/questions/55593431/cant-receive-data-from-axios-on-api
