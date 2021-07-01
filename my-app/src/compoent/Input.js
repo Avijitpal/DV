@@ -72,7 +72,7 @@ function Input() {
       /* Convert array of arrays */
       const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
       processData(data);
-      //console.log(data);
+      console.log(data);
       axios
       .post('http://localhost:8000/print',data)
       .then(()=>console.log(data))
