@@ -1,115 +1,93 @@
 ///import logo from './logo.svg';
-import axios from 'axios';
+//import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import {Bar} from 'react-chartjs-2'
+//import {Bar} from 'react-chartjs-2'
+//import React from 'react'
 
-const DynamicChart = () => {
-    const [chartData, setChartData]  = useState({});
-    const [employeeSalary, setEmployeeSalary] = useState([]);
-    const [employeeAge, setEmployeeAge] = useState([]);
+class Input extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        months: 0,
+        Amount: 0,
+        numberofmonths:0
+      };
+  
+      this.handleInputChange1= this.handleInputChange1.bind(this);
+      this.handleInputChange2= this.handleInputChange2.bind(this);
+      this.handleInputChange3= this.handleInputChange3.bind(this);
 
- const Chart = () => {
-        let empSal = [];
-        let empAge = [];
-
-        axios.get("http://dummy.restapiexample.com/api/v1/employees")
-        .then(res => {
-            console.log(res);
-            for(const dataObj of res.data.data){
-                empSal.push(parseInt(dataObj.employee_salary));
-                empAge.push(parseInt(dataObj.employee_age ));
-
-            }
-            setChartData({
-                labels: empAge,
-                datasets: [{
-                                             label: 'level of thicceness',
-                                             data: empSal,
-                                             backgroundColor: [
-                                                 'rgba(255, 99, 132, 0.2)',
-                                                 'rgba(54, 162, 235, 0.2)',
-                                                 'rgba(255, 206, 86, 0.2)',
-                                                 'rgba(75, 192, 192, 0.2)',
-                                                 'rgba(153, 102, 255, 0.2)',
-                                                 'rgba(255, 159, 64, 0.2)',
-                                                 'rgba(255, 99, 132, 0.2)',
-                                                 'rgba(54, 162, 235, 0.2)',
-                                                 'rgba(255, 206, 86, 0.2)',
-                                                 'rgba(75, 192, 192, 0.2)',
-                                                 'rgba(153, 102, 255, 0.2)',
-                                                 'rgba(255, 159, 64, 0.2)',
-                                                 'rgba(255, 99, 132, 0.2)',
-                                                 'rgba(54, 162, 235, 0.2)',
-                                                 'rgba(255, 206, 86, 0.2)',
-                                                 'rgba(75, 192, 192, 0.2)',
-                                                 'rgba(153, 102, 255, 0.2)',
-                                                 'rgba(255, 159, 64, 0.2)',
-                                                 'rgba(255, 99, 132, 0.2)',
-                                                 'rgba(54, 162, 235, 0.2)',
-                                                 'rgba(255, 206, 86, 0.2)',
-                                                 'rgba(75, 192, 192, 0.2)',
-                                                 'rgba(153, 102, 255, 0.2)',
-                                                 'rgba(255, 159, 64, 0.2)',
-                                             ],
-                                             borderColor: [
-                                                 'rgba(255, 99, 132, 1)',
-                                                 'rgba(54, 162, 235, 1)',
-                                                 'rgba(255, 206, 86, 1)',
-                                                 'rgba(75, 192, 192, 1)',
-                                                 'rgba(153, 102, 255, 1)',
-                                                 'rgba(255, 159, 64, 1)',
-                                                 'rgba(255, 99, 132, 1)',
-                                                 'rgba(54, 162, 235, 1)',
-                                                 'rgba(255, 206, 86, 1)',
-                                                 'rgba(75, 192, 192, 1)',
-                                                 'rgba(153, 102, 255, 1)',
-                                                 'rgba(255, 159, 64, 1)',
-                                                 'rgba(255, 99, 132, 1)',
-                                                 'rgba(54, 162, 235, 1)',
-                                                 'rgba(255, 206, 86, 1)',
-                                                 'rgba(75, 192, 192, 1)',
-                                                 'rgba(153, 102, 255, 1)',
-                                                 'rgba(255, 159, 64, 1)',
-                                                 'rgba(255, 99, 132, 1)',
-                                                 'rgba(54, 162, 235, 1)',
-                                                 'rgba(255, 206, 86, 1)',
-                                                 'rgba(75, 192, 192, 1)',
-                                                 'rgba(153, 102, 255, 1)',
-                                                 'rgba(255, 159, 64, 1)',
-                                             ],
-                                             borderWidth: 1
-                                         }]
-            });
-        })
-        .catch(err =>{
-            console.log(err);
-        })
-        
     }
-    useEffect(() => {
-        Chart();
-      }, []);
-      return(
-          <div className="App">
-              <h1>Bar Chart</h1>
-              <div>
-                  <Bar
-                    data={chartData}
-                    options={{
-                        responsive:true,
-                        title: { text: "THICCNESS SCALE", display: true },
-                        scales:{
-                            yAxes:{
-                                ticks:{
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    }}
-                  />
-              </div>
-          </div>
-      )
-}
+  
+    handleInputChange1(event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      console.log(value)
+      this.setState({
+        [name]: value
+      });
+    }
+    handleInputChange2(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log(value)
+        this.setState({
+          [name]: value
+        });
+      }
+      handleInputChange3(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log(value)
+        this.setState({
+          [name]: value
+        });
+      }  
+    
+  
+    render() {
+      return (
+        <form>
+          <label>
+            Months:
+            <input
+              name="mothts"
+              type="number"
+              value={this.state.months}
+              onChange={this.handleInputChange1} />
+          </label>
+          <br />
+          <label>
+            Amount:
+            <input
+              name="Amount"
+              type="number"
+              value={this.state.Amount}
+              onChange={this.handleInputChange2} />
+          </label>
+          <br/>
+          <label>
+           Number of months:
+            <input 
+            name="numberofmonths"
+            type="number"
+            value={this.state.numberofmonths}
+            onChange={this.handleInputChange3}/>
+          </label>
+        </form>
+      );
+    }
+  }
 
-export default DynamicChart;
+
+function App() {
+    return (
+        <div>
+            <Input/>
+        </div>
+    )
+}
+export default App
