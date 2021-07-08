@@ -3,12 +3,13 @@
 import React, { useState, useEffect } from 'react'
 //import {Bar} from 'react-chartjs-2'
 //import React from 'react'
+///////////form needs to be craeted and search how to create form in reatc js 
 
 class Input extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        months: 0,
+        months:0,
         Amount: 0,
         numberofmonths:0
       };
@@ -23,7 +24,7 @@ class Input extends React.Component {
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const name = target.name;
-      console.log(value)
+      //console.log(value)
       this.setState({
         [name]: value
       });
@@ -32,7 +33,7 @@ class Input extends React.Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(value)
+      //  console.log(value)
         this.setState({
           [name]: value
         });
@@ -41,21 +42,23 @@ class Input extends React.Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(value)
+       // console.log(value)
         this.setState({
           [name]: value
         });
       }  
-    
+    handleSubmit(event){
+       
+    }
   
     render() {
       return (
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Months:
             <input
               name="mothts"
-              type="number"
+              type="text"
               value={this.state.months}
               onChange={this.handleInputChange1} />
           </label>
@@ -77,6 +80,7 @@ class Input extends React.Component {
             value={this.state.numberofmonths}
             onChange={this.handleInputChange3}/>
           </label>
+          <input type="submit" value="Submit"/>
         </form>
       );
     }
