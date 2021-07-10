@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-
-
+//import React, { Component } from 'react'
+//import { useState } from 'react';
+import React from "react";
 
 class Inputfield extends React.Component {
   constructor(props) {
@@ -9,16 +9,19 @@ class Inputfield extends React.Component {
      maindata: {
       //  months:0,
         Amount: 0,
-        numberofmonths:0
+        numberofmonths:0,
+        whichmonth:''
       }
     };
+
 
     //this.handleInputChange1= this.handleInputChange1.bind(this);
     this.handleInputChange1= this.handleInputChange1.bind(this);
     this.handleInputChange2= this.handleInputChange2.bind(this);
-
+    this.handleInputChange3= this.handleInputChange3.bind(this);
   }
-
+  //const data =[Amount:]
+  
   //handleInputChange1(event) {
    //  var data1 = this.state.maindata;
      // data1.months = event.target.value;
@@ -27,6 +30,8 @@ class Inputfield extends React.Component {
     //  miandata : data1
     //});
  // }
+ //const Data = JSON.stringify(Object);
+
   handleInputChange1(event) {
        var data1 = this.state.maindata;
        data1.Amount = event.target.value;
@@ -40,9 +45,17 @@ class Inputfield extends React.Component {
        var data2 = this.state.maindata;
        data2.numberofmonths = event.target.value;
        this.setState({maindata:data2});
-    }  
+    } 
+    handleInputChange3(event){
+      var data3 = this.state.maindata;
+      data3.whichmonth = event.target.value;
+      this.setState({whichmonth:event.target.value});
+    } 
     handleSubmit(event){
-         console.log(this.state.maindata);
+      event.preventDefault();
+         const consoledata = this.state.maindata
+         const myJSON = JSON.stringify(consoledata);
+         console.log(myJSON);
      }
 
  // <label>
@@ -59,7 +72,7 @@ class Inputfield extends React.Component {
   render() {
     return (
       <div>
-      <form>
+      <form  onSubmit={this.handleSubmit.bind(this)}>
           <label>
           Amount:
           <input
@@ -78,11 +91,17 @@ class Inputfield extends React.Component {
           onChange={this.handleInputChange2}/>
         </label>
         <br></br>
-         <button  onSubmit={this.handleSubmit.bind(this)}>Submit</button>
+         Month
+        <label>
+            <input name="whichmonth" 
+            type="text" 
+            value={this.state.maindata.whichmonth} 
+            onChange={this.handleInputChange3} />
+        </label>
+         <button>Submit</button>
       </form>
       </div>
     );
   }
 }
-
 export default Inputfield
