@@ -1,12 +1,11 @@
 import React from 'react'
 
-
-const Menu = () =>{
+function View() {
     return (
-        console.log("wellcome to the new page"),
         <div>
-          
+            
         </div>
     )
 }
-export default Menu;
+
+export default View

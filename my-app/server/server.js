@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
 // here we are adding the react app link to specify the path 
   app.use(
     cors({
-      origin: 'http://localhost:3000/',
-      credentials: true,
+     // origin: 'http://localhost:3000/',
+      credentials: true, 
     })
   );
   
