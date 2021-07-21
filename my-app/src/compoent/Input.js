@@ -7,28 +7,27 @@ class Inputfield extends React.Component {
     super(props);
     this.state = {
       //  months:0,
-        Amount: [],
-        numberofmonths:[],
+        Amount:  0,
+        numberofmonths:0,
         whichmonth:'',
+        amount:[],
+        numberofMonths:[],
+        whichMonth:[]
     };    
     this.handleInputChange1= this.handleInputChange1.bind(this);
     this.handleInputChange2= this.handleInputChange2.bind(this);
-    this.handleInputChange3= this.handleInputChange3.bind(this);
-    
-     
+    this.handleInputChange3= this.handleInputChange3.bind(this);   
   }
    
   handleInputChange1(event) {
        var data1 = this.state;
        data1.Amount = event.target.value;
-       this.setState({
-         Amount:data1
-       });
+       this.setState({Amount:event.target.value});
     }
     handleInputChange2(event) {
        var data2 = this.state;
        data2.numberofmonths = event.target.value;
-       this.setState({numberofmonths:data2});
+       this.setState({numberofmonths:event.target.value});
     } 
     handleInputChange3(event){
       var data3 = this.state;
@@ -37,15 +36,33 @@ class Inputfield extends React.Component {
     } 
     handleSubmit(event){
       event.preventDefault();
-      const data1 = event.target.value;
-     // 
+      var data1 = event.target.value;
       console.log(data1);
      }
 
       addthedata(event){
         event.preventDefault();
-          console.log("this is working")
+        if(event.target.name==="Amount"){
+              const price = event.target.value;
+              this.setState({
+                amount:price
+              });
+
         }
+       else if(event.target.name === "numberofMonths"){
+         const nm = event.target.value;
+           this.setState({
+                numberofMonths:nm
+           });
+       } 
+        else if(event.target.name==="whichmonth"){
+          const monthname = event.target.value;
+          this.setState({
+            whichMonth:monthname
+          })
+     }
+    // console.log(amount)
+  }
 
   render() {
     return (
