@@ -1,105 +1,79 @@
-//import React, { Component } from 'react'
+import React, { Component } from 'react'
 //import { useState } from 'react';
-import React from "react";
-
-class Inputfield extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      //  months:0,
-        Amount:  0,
-        numberofmonths:0,
-        whichmonth:'',
-        amount:[],
-        numberofMonths:[],
-        whichMonth:[]
-    };    
-    this.handleInputChange1= this.handleInputChange1.bind(this);
-    this.handleInputChange2= this.handleInputChange2.bind(this);
-    this.handleInputChange3= this.handleInputChange3.bind(this);   
+//import React from "react";
+class Form extends Component{
+  constructor(props){
+    super(props)
+    this.state = { 
+      arr:[{Amount:null, Month:''}]
+  }//age:null, address:'',phoneNo:''}
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-   
-  handleInputChange1(event) {
-       var data1 = this.state;
-       data1.Amount = event.target.value;
-       this.setState({Amount:event.target.value});
-    }
-    handleInputChange2(event) {
-       var data2 = this.state;
-       data2.numberofmonths = event.target.value;
-       this.setState({numberofmonths:event.target.value});
-    } 
-    handleInputChange3(event){
-      var data3 = this.state;
-      data3.whichmonth = event.target.value;
-      this.setState({whichmonth:event.target.value});
-    } 
-    handleSubmit(event){
-      event.preventDefault();
-      var data1 = event.target.value;
-      console.log(data1);
-     }
-
-      addthedata(event){
-        event.preventDefault();
-        if(event.target.name==="Amount"){
-              const price = event.target.value;
-              this.setState({
-                amount:price
-              });
-
-        }
-       else if(event.target.name === "numberofMonths"){
-         const nm = event.target.value;
-           this.setState({
-                numberofMonths:nm
-           });
-       } 
-        else if(event.target.name==="whichmonth"){
-          const monthname = event.target.value;
-          this.setState({
-            whichMonth:monthname
-          })
-     }
-    // console.log(amount)
+  
+  // Form submitting logic, prevent default page refresh 
+  handleSubmit(event){
+    //const { Amount, Month}=this.state//age, address, phoneNo } = this.state
+    event.preventDefault()
+    let values =[...this.state.arr];
+      values.push({
+        Amount:this.state.Amount,
+        Month:this.state.Month
+      });
+      console.log(values)
+      this.setState({values});
+  }
+  handleChange(event){
+    this.setState({
+      // Computed property names
+      // keys of the objects are computed dynamically
+      [event.target.name] : event.target.value
+    })
   }
 
-  render() {
-    return (
-      <div>
-      <form >
-          <label>
-          Amount:
-          <input name="Amount" type="number"
-           value={this.state.Amount} 
-           onChange={this.handleInputChange1} />
-        </label>
-        <button onClick={this.addthedata}>ADD</button>
-        <br/>
-        <label>
-         Number of months:
-          <input name="numberofmonths" type="number"
-         value={this.state.numberofmonths} 
-          onChange={this.handleInputChange2}/>
-        </label>
-        <button onClick={this.addthedata}>ADD</button>
-        <br></br>
-        
-         Month
-        <label>
-            <input name="whichmonth" type="text" 
-            value={this.state.whichmonth} 
-            onChange={this.handleInputChange3} />
-        </label>
-
-         <button onClick={this.addthedata}>ADD</button>
-          <div>
-               <button onClick={this.handleSubmit}>CREATE</button>
-          </div>
-        
+  
+  // Return a controlled form i.e. values of the 
+  // input field not stored in DOM values are exist 
+  // in react component itself as state
+  render(){
+    return(
+      <form onSubmit={this.handleSubmit}>
+        <div>
+        {/*This is the Amount selection */}
+          <label htmlFor='email'>Amount</label>
+          <input 
+            name='Amount'
+            placeholder='Amount' 
+            value = {this.state.Amount}
+            onChange={this.handleChange}
+          />
+        </div>
+        {/*This is for the month selection*/}
+        <div>
+          <label htmlFor='Month'>Month</label>
+           <select name='Month' value={this.state.value} onChange={this.handleChange}>
+           <option name='Month' value="January">January</option>
+           <option name='Month' value="February">February</option>
+           <option name='Month' value="March">March</option>
+           <option name='Month' value="April">April</option>
+           <option name='Month' value="May">May</option>
+           <option name='Month' value="June">June</option>
+           <option name='Month' value="July">July</option>
+           <option name='Month' value="August">August</option>
+           <option name='Month' value="September">September</option>
+           <option name='Month' value="October">October</option>
+           <option name='Month' value="November">November</option>
+           <option name='Month' value="December">December</option>
+           </select>
+        </div>
+        <div>
+          <button >ADD</button>
+        </div>
       </form>
-      </div>
-    );
+    )
   }
 }
-export default Inputfield
+  
+export default Form
+//1.placeholder needs to be added
+//
