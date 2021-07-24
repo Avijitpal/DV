@@ -1,60 +1,41 @@
-import React, { Component } from 'react'
-//import { useState } from 'react';
-//import React from "react";
-class Form extends Component{
-  constructor(props){
-    super(props)
-    this.state = { 
-      arr:[{Amount:0, Month:''}],
-      data:[]
-  }//age:null, address:'',phoneNo:''}
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-  
+//import React, { Component } from 'react'
+import React from "react";
+function Form(){
+ const [Amount,setAmount] = React.useState(0);
+ const [Month,setMonth] = React.useState("");
+ const values=[];
+ const data=[];
   // Form submitting logic, prevent default page refresh 
-  handleSubmit(event){
-    //const { Amount, Month}=this.state//age, address, phoneNo } = this.state
-    event.preventDefault()
-    let values = [];
-      values.push({
-        Amount:this.state.Amount,
-        Month:this.state.Month
-      });
-  let data = [];
-  data.push({values})
-      console.log(JSON.stringify(data))
-      this.setState({values});
-  }
-  handleChange(event){
-    this.setState({
-      // Computed property names
-      // keys of the objects are computed dynamically
-      [event.target.name] : event.target.value
-    })
+  const handleSubmit= event => {
+    //here we are pushing the data into the array
+    values.push({"Amount":Amount ,"Month":Month});
+    data =[...values];
+    console.log(data)
+    event.preventDefault();
   }
 
   
   // Return a controlled form i.e. values of the 
   // input field not stored in DOM values are exist 
   // in react component itself as state
-  render(){
+
+
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
         {/*This is the Amount selection */}
           <label htmlFor='email'>Amount</label>
           <input 
             name='Amount'
-            placeholder='Amount' 
-            value = {this.state.Amount}
-            onChange={this.handleChange}
+            type = "number"
+            value = {Amount}
+            onChange={e=>setAmount(e.target.value)}
+            required 
           />
         </div>
-        {/*This is for the month selection*/}
-        <div>
+        <div >
           <label htmlFor='Month'>Month</label>
-           <select name='Month' value={this.state.value} onChange={this.handleChange}>
+           <select name='Month' value={Month} onChange={e=>setMonth(e.target.value) } required >
            <option name='Month' value="January">January</option>
            <option name='Month' value="February">February</option>
            <option name='Month' value="March">March</option>
@@ -75,8 +56,6 @@ class Form extends Component{
       </form>
     )
   }
-}
-  
 export default Form
 //1.placeholder needs to be added
 //
