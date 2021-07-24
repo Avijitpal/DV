@@ -5,7 +5,8 @@ class Form extends Component{
   constructor(props){
     super(props)
     this.state = { 
-      arr:[{Amount:null, Month:''}]
+      arr:[{Amount:0, Month:''}],
+      data:[]
   }//age:null, address:'',phoneNo:''}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -15,12 +16,14 @@ class Form extends Component{
   handleSubmit(event){
     //const { Amount, Month}=this.state//age, address, phoneNo } = this.state
     event.preventDefault()
-    let values =[...this.state.arr];
+    let values = [];
       values.push({
         Amount:this.state.Amount,
         Month:this.state.Month
       });
-      console.log(values)
+  let data = [];
+  data.push({values})
+      console.log(JSON.stringify(data))
       this.setState({values});
   }
   handleChange(event){
